@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:50 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/05 20:29:16 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/07 13:48:40 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,35 @@ static void	trim_newline(char *line)
 		line[len - 1] = '\0';
 }
 
+static int	manage_line(t_cub *cub, char *line, int *map_ended)
+{
+	trim_newline(line);
+	if (cub->elements_found < 6)
+	{
+		if (!is_empty_line(line) && !parse_element(line, cub))
+			return (free(line), 1);
+	}
+	else
+	{
+		if (is_empty_line(line))
+		{
+			if (cub->map.height > 0)
+				*map_ended = 1;
+		}
+		else
+		{
+			if (*map_ended)
+				return (free(line), 2);
+			extract_map_line(line, cub);
+		}
+	}
+	return (0);
+}
+
 void	parse_file(int fd, t_cub *cub)
 {
 	char	*line;
+	int		out;
 	int		map_ended;
 
 	map_ended = 0;
@@ -61,33 +87,11 @@ void	parse_file(int fd, t_cub *cub)
 	line = get_next_line(fd);
 	while (line)
 	{
-		trim_newline(line);
-		if (cub->elements_found < 6)
-		{
-			if (!is_empty_line(line) && !parse_element(line, cub))
-			{
-				free(line);
-				err_exit(cub,
-					"Error\nInvalid element or map started too early");
-			}
-		}
-		else
-		{
-			if (is_empty_line(line))
-			{
-				if (cub->map.height > 0)
-					map_ended = 1;
-			}
-			else
-			{
-				if (map_ended)
-				{
-					free(line);
-					err_exit(cub, "Error\nEmpty line inside the map content");
-				}
-				extract_map_line(line, cub);
-			}
-		}
+		out = manage_line(cub, line, &map_ended);
+		if (out == 1)
+			err_exit(cub, "Error\nInvalid element or map started too early");
+		else if (out == 2)
+			err_exit(cub, "Error\nEmpty line inside the map content");
 		free(line);
 		line = get_next_line(fd);
 	}

@@ -6,13 +6,13 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:25 by alejandj          #+#    #+#             */
-/*   Updated: 2026/04/24 13:48:42 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/07 13:51:13 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static void destroy_img(t_cub *cub)
+static void	destroy_img(t_cub *cub)
 {
 	int	j;
 
@@ -66,7 +66,6 @@ void	err_exit(t_cub *cub, char *message)
 {
 	if (message)
 	{
-		// Printing to file descriptor 2 (STDERR)
 		write(2, message, ft_strlen(message));
 		write(2, "\n", 1);
 	}
@@ -75,12 +74,12 @@ void	err_exit(t_cub *cub, char *message)
 	exit(1);
 }
 
-void my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
 	if (x < 0 || y < 0 || x >= WIDTH || y >= HEIGHT)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }

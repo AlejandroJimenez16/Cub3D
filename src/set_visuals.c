@@ -6,14 +6,14 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:54:49 by alejandj          #+#    #+#             */
-/*   Updated: 2026/04/24 13:48:34 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/07 13:52:21 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 /*
-** Extracts the texture path and verifies that the file actually exists and is readable.
+** Extracts the texture path and verifies that the file exists and is readable.
 */
 static int	extract_texture(char **path, char *line)
 {
@@ -30,7 +30,7 @@ static int	extract_texture(char **path, char *line)
 		return (0);
 	temp_path = ft_strdup(&line[i]);
 	if (!temp_path)
-		return (0);		
+		return (0);
 	fd = open(temp_path, O_RDONLY);
 	if (fd == -1)
 	{
