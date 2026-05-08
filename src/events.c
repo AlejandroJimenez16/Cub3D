@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 13:24:57 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/05 19:57:48 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/08 21:25:03 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,5 @@ int	handle_key_release(int keycode, void *param)
 		cub->keys.left = 0;
 	else if (keycode == RIGHT_KEY)
 		cub->keys.right = 0;
-	return (0);
-}
-
-int	handle_move(void *param)
-{
-	t_cub	*cub;
-	int		moved;
-
-	cub = (t_cub *)param;
-	moved = 0;
-	if (move_player(cub))
-		moved = 1;
-	if (move_chamera(cub))
-		moved = 1;
-	if (moved)
-		raycast_loop(cub);
 	return (0);
 }

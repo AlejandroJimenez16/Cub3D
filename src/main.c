@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:59 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/08 21:10:00 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/08 21:32:30 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,10 @@ static void	run_game(t_cub *cub)
 	load_texture(cub, EA, cub->ea_path);
 	load_texture(cub, WE, cub->we_path);
 	ft_printf("Map and config loaded successfully! Starting game...\n");
-	raycast_loop(cub);
 	mlx_hook(cub->win, 2, 1L << 0, handle_key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, handle_key_release, cub);
 	mlx_hook(cub->win, 17, 0, close_window, cub);
-	mlx_hook(cub->win, 22, 1L << 17, raycast_loop, cub);
-	mlx_loop_hook(cub->mlx, handle_move, cub);
+	mlx_loop_hook(cub->mlx, game_loop, cub);
 	mlx_loop(cub->mlx);
 }
 

@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/08 19:23:47 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/08 21:28:58 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ int		close_window(t_cub *cub);
 // events.c
 int		handle_key_press(int keycode, void *param);
 int		handle_key_release(int keycode, void *param);
-int		handle_move(void *param);
 
 // player_move.c
 int		move_player(t_cub *cub);
@@ -194,6 +193,9 @@ void	draw_2d_map(t_cub *cub);
 
 // render3d.c
 void	draw_vertical_line(t_cub *cub, t_ray *ray, int x);
+
+// game_loop.c
+int		game_loop(void *param);
 
 // cub3d_utils.c
 void	free_cub(t_cub *cub);
