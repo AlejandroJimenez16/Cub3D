@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:50 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/07 13:48:40 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/08 20:47:01 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,9 @@ static int	manage_line(t_cub *cub, char *line, int *map_ended)
 	return (0);
 }
 
+/*
+** Parse configuration elements and ensure no empty lines inside the map.
+*/
 void	parse_file(int fd, t_cub *cub)
 {
 	char	*line;

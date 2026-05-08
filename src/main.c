@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:59 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/07 13:44:15 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/08 21:10:00 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ static void	load_texture(t_cub *cub, int index, char *path)
 }
 
 /*
-** 1. Initialize mlx: cub->mlx = mlx_init();
-** 2. Open window: cub->win = mlx_new_window(...);
-** 3. Convert NO, SO, WE, EA paths into mlx images.
-** 4. Set up mlx_hook for keys (WASD, arrows, ESC).
-** 5. Start the render loop: mlx_loop_hook(...);
-** 6. mlx_loop(cub->mlx);
+** 1. Initialize mlx
+** 2. Create window
+** 3. Load textures
+** 4. Render map
+** 5. Set up events hooks (keyboard, exit, etc.)
+** 6. Start render loop (movement + raycasting)
+** 7. Enter mlx loop
 */
 static void	run_game(t_cub *cub)
 {
@@ -86,6 +87,7 @@ static void	run_game(t_cub *cub)
 	mlx_hook(cub->win, 2, 1L << 0, handle_key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, handle_key_release, cub);
 	mlx_hook(cub->win, 17, 0, close_window, cub);
+	mlx_hook(cub->win, 22, 1L << 17, raycast_loop, cub);
 	mlx_loop_hook(cub->mlx, handle_move, cub);
 	mlx_loop(cub->mlx);
 }

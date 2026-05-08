@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:54:37 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/05 19:25:01 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/08 20:48:05 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,9 @@ static int	check_walls(t_map *map)
 	return (1);
 }
 
+/*
+** Check that map contains exactly one player, valid characters, and is enclosed.
+*/
 void	validate_cub_map(t_cub *cub)
 {
 	if (!check_chars_and_player(cub))

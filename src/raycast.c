@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 20:50:36 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/07 14:11:04 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/08 19:23:30 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	advance_ray(t_ray *ray, t_cub *cub)
 	return (hit);
 }
 
-void	raycast_loop(t_cub *cub)
+int	raycast_loop(t_cub *cub)
 {
 	t_ray	ray;
 	int		i;
@@ -95,4 +95,5 @@ void	raycast_loop(t_cub *cub)
 		draw_vertical_line(cub, &ray, i);
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img_ptr, 0, 0);
+	return (0);
 }

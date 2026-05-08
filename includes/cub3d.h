@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/05 19:53:54 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/08 19:23:47 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ int		move_player(t_cub *cub);
 int		move_chamera(t_cub *cub);
 
 // raycast.c
-void	raycast_loop(t_cub *cub);
+int		raycast_loop(t_cub *cub);
 
 // render.c
 void	draw_ray(t_cub *cub, t_ray *ray, int color);
