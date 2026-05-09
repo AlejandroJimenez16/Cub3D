@@ -6,18 +6,26 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:50:52 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/08 14:08:05 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/10 01:01:31 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+#define OFFSET 0.2
+
 static void	handle_collision(t_cub *cub, double next_x, double next_y)
 {
-	if (cub->map.grid[(int)cub->player.y][(int)next_x] != '1')
+	if (cub->map.grid[(int)next_y][(int)(next_x - OFFSET)] != '1'
+		&& cub->map.grid[(int)next_y][(int)(next_x + OFFSET)] != '1')
+	{
 		cub->player.x = next_x;
-	if (cub->map.grid[(int)next_y][(int)cub->player.x] != '1')
+	}
+	if (cub->map.grid[(int)(next_y - OFFSET)][(int)(next_x)] != '1'
+		&& cub->map.grid[(int)(next_y + OFFSET)][(int)next_x] != '1')
+	{
 		cub->player.y = next_y;
+	}
 }
 
 int	move_player(t_cub *cub)
