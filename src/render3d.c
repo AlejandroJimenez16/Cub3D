@@ -42,24 +42,20 @@ static int	calculate_tex_x(t_ray *ray)
 	double	wall_x;
 	int		tex_x;
 
-	// 1. Check which axis the wall runs along
 	if (ray->side == 0)
 		wall_x = ray->hit_y;
 	else
 		wall_x = ray->hit_x;
-	
-	// 2. Get the exact decimal fraction
 	wall_x -= floor(wall_x);
-	
-	// 3. Convert fraction to pixel column
 	tex_x = (int)(wall_x * (double)TEX_WIDTH);
-	
-	// Optional: Flip texture so it doesn't look mirrored on certain sides
 	if (ray->side == 0 && ray->ray_dir_x > 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
 	if (ray->side == 1 && ray->ray_dir_y < 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
-
+	if (tex_x < 0)
+		tex_x = 0;
+	else if (tex_x > TEX_WIDTH - 1)
+		tex_x = TEX_WIDTH - 1;
 	return (tex_x);
 }
 
@@ -94,6 +90,8 @@ void	draw_vertical_line(t_cub *cub, t_ray *ray, int x)
 			d.tex_y = (int)d.tex_pos;
 			if (d.tex_y > TEX_HEIGHT - 1)
 				d.tex_y = TEX_HEIGHT - 1;
+			else if (d.tex_y < 0)
+				d.tex_y = 0;
 			d.tex_pos += d.step;
 			my_mlx_pixel_put(&cub->screen, x, y,
 				get_wall_pixel_color(cub, ray, d.tex_x, d.tex_y));
