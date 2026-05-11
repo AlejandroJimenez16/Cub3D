@@ -17,32 +17,27 @@
 */
 static void	initialize_player(t_cub *cub, char player_c, int x, int y)
 {
-	if (player_c == 'N')
-	{
-		cub->player.dir_x = 0;
-		cub->player.dir_y = -1;
-		cub->player.plane_x = 0.66;
-		cub->player.plane_y = 0;
-	}
-	else if (player_c == 'S')
+	if (player_c == 'N' || player_c == 'S')
 	{
 		cub->player.dir_x = 0;
 		cub->player.dir_y = 1;
-		cub->player.plane_x = -0.66;
+		cub->player.plane_x = 0.66;
 		cub->player.plane_y = 0;
 	}
-	else if (player_c == 'E')
+	else if (player_c == 'E' || player_c == 'W')
 	{
 		cub->player.dir_x = 1;
 		cub->player.dir_y = 0;
 		cub->player.plane_x = 0;
 		cub->player.plane_y = 0.66;
 	}
+	if (player_c == 'N')
+		cub->player.dir_y = -1;
+	else if (player_c == 'S')
+		cub->player.plane_x = -0.66;
 	else if (player_c == 'W')
 	{
 		cub->player.dir_x = -1;
-		cub->player.dir_y = 0;
-		cub->player.plane_x = 0;
 		cub->player.plane_y = -0.66;
 	}
 	cub->player.x = x + 0.5;
