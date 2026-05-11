@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 static void	destroy_img(t_cub *cub)
 {
@@ -56,7 +56,10 @@ void	free_cub(t_cub *cub)
 		free(cub->map.grid);
 	}
 	if (cub->mlx)
+	{
 		destroy_img(cub);
+		mlx_mouse_show(cub->mlx, cub->win);
+	}
 }
 
 /*

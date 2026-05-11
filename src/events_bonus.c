@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 int	handle_key_press(int keycode, void *param)
 {
@@ -51,5 +51,26 @@ int	handle_key_release(int keycode, void *param)
 		cub->keys.left = 0;
 	else if (keycode == RIGHT_KEY)
 		cub->keys.right = 0;
+	return (0);
+}
+
+int	mouse_hook(int x, int y, t_cub *cub)
+{
+	int		delta_x;
+	double	angle;
+
+	(void)y; // Silences the unused variable warning
+	
+	// 1. Filter out the artificial recentering events
+	if (x == WIDTH / 2)
+		return (0);
+		
+	// 2. Calculate drift and rotate
+	delta_x = x - WIDTH / 2;
+	angle = delta_x * MOUSE_SENS;
+	rotate_player(&cub->player, angle);
+	
+	// 3. Force the cursor back to the center for the next real move
+	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }

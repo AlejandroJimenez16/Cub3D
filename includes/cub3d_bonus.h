@@ -32,6 +32,7 @@
 
 # define MOVE_SPEED 0.03
 # define ROT_SPEED 0.009
+# define MOUSE_SENS 0.0003
 
 # define ESC 65307
 
@@ -179,10 +180,12 @@ int		close_window(t_cub *cub);
 // events.c
 int		handle_key_press(int keycode, void *param);
 int		handle_key_release(int keycode, void *param);
+int		mouse_hook(int x, int y, t_cub *cub);
 
 // player_move.c
 int		move_player(t_cub *cub);
 int		move_chamera(t_cub *cub);
+void	rotate_player(t_player *player, double speed);
 
 // raycast.c
 int		raycast_loop(t_cub *cub);

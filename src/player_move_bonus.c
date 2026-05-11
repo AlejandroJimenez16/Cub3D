@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 #define OFFSET 0.2
 
@@ -65,7 +65,7 @@ int	move_player(t_cub *cub)
 	return (0);
 }
 
-static void	rotate_player(t_player *player, double speed)
+void	rotate_player(t_player *player, double speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;
