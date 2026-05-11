@@ -1,25 +1,25 @@
 # Executable name
-NAME		= cub3D
+NAME		= cub3D_bonus
 
 # Compiler and flags
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -g -Iincludes -I$(MINILIBXDIR)
 
 # Sources (Add your specific files here)
-SRCS		= src/main.c				\
-			  src/map_extraction.c		\
-			  src/map_validation.c		\
-			  src/file_parser.c			\
-			  src/set_visuals.c			\
-			  src/cub3d_utils.c			\
-			  src/debug.c				\
-			  src/window.c				\
-			  src/events.c				\
-			  src/player_move.c			\
-			  src/raycast.c				\
-			  src/render.c				\
-			  src/render3d.c			\
-			  src/game_loop.c
+SRCS		= src/main_bonus.c					\
+			  src/map_extraction_bonus.c		\
+			  src/map_validation_bonus.c		\
+			  src/file_parser_bonus.c			\
+			  src/set_visuals_bonus.c			\
+			  src/cub3d_utils_bonus.c			\
+			  src/debug_bonus.c					\
+			  src/window_bonus.c				\
+			  src/events_bonus.c				\
+			  src/player_move_bonus.c			\
+			  src/raycast_bonus.c				\
+			  src/render_bonus.c				\
+			  src/render3d_bonus.c				\
+			  src/game_loop_bonus.c
 
 OBJS		= $(SRCS:.c=.o)
 
