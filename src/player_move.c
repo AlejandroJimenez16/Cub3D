@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:50:52 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/14 17:48:45 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/16 17:57:09 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,75 +33,83 @@ static void	handle_collision(t_cub *cub, double next_x, double next_y)
 	}
 }
 
-int	move_player(t_cub *cub)
+static int	move_diagonal(t_cub *cub, double next_x, double next_y)
 {
-	double	next_x;
-	double	next_y;
+	double	next_x_vert;
+	double	next_y_vert;
+	double	next_x_side;
+	double	next_y_side;
 	double	speed;
-	
-	next_x = 0;
-	next_y = 0;
-	
+
 	if ((cub->keys.w || cub->keys.s) && (cub->keys.a || cub->keys.d))
 	{
 		speed = MOVE_SPEED * 0.707;
 		
-		if (cub->keys.w && (cub->keys.a || cub->keys.d))
+		next_x_vert = cub->player.dir_x * speed;
+		next_y_vert = cub->player.dir_y * speed;
+		next_x_side = cub->player.plane_x * speed;
+		next_y_side = cub->player.plane_y * speed;
+		
+		if (cub->keys.w && cub->keys.a)
 		{
-			double	next_x_w;
-			double	next_y_w;
-			double	next_x_2;
-			double	next_y_2;
-			
-			next_x_w = cub->player.dir_x * speed;
-			next_y_w = cub->player.dir_y * speed;
-			next_x_2 = cub->player.plane_x * speed;
-			next_y_2 = cub->player.plane_y * speed;
-			
-			if (cub->keys.a)
-			{
-				next_x = cub->player.x + next_x_w - next_x_2;
-				next_y = cub->player.y + next_y_w - next_y_2;
-			}
-			else
-			{
-				next_x = cub->player.x + next_x_w + next_x_2;
-				next_y = cub->player.y + next_y_w + next_y_2;
-			}
-			
-			handle_collision(cub, next_x, next_y);
-			return (0);
+			next_x = cub->player.x + next_x_vert - next_x_side;
+			next_y = cub->player.y + next_y_vert - next_y_side;
 		}
-		
-			
+		else if (cub->keys.w && cub->keys.d)
+		{
+			next_x = cub->player.x + next_x_vert + next_x_side;
+			next_y = cub->player.y + next_y_vert + next_y_side;
+		}
+		else if (cub->keys.s && cub->keys.a)
+		{
+			next_x = cub->player.x - next_x_vert - next_x_side;
+			next_y = cub->player.y - next_y_vert - next_y_side;
+		}
+		else if (cub->keys.s && cub->keys.d)
+		{
+			next_x = cub->player.x - next_x_vert + next_x_side;
+			next_y = cub->player.y - next_y_vert + next_y_side;
+		}
+		handle_collision(cub, next_x, next_y);
+		return (1);
 	}
-	else
-		speed = MOVE_SPEED;
-		
+	return (0);
+}
+
+int	move_player(t_cub *cub)
+{
+	double	next_x;
+	double	next_y;
+
+	next_x = 0;
+	next_y = 0;
+	if (move_diagonal(cub, next_x, next_y))
+		return (0);
 	if (cub->keys.w)
 	{
-		next_x = cub->player.x + cub->player.dir_x * speed;
-		next_y = cub->player.y + cub->player.dir_y * speed;
-		handle_collision(cub, next_x, next_y);
+		next_x = cub->player.x + cub->player.dir_x * MOVE_SPEED;
+		next_y = cub->player.y + cub->player.dir_y * MOVE_SPEED;
+		//handle_collision(cub, next_x, next_y);
 	}	
-	if (cub->keys.a)
+	else if (cub->keys.a)
 	{
-		next_x = cub->player.x - cub->player.plane_x * speed;
-		next_y = cub->player.y - cub->player.plane_y * speed;
-		handle_collision(cub, next_x, next_y);
+		next_x = cub->player.x - cub->player.plane_x * MOVE_SPEED;
+		next_y = cub->player.y - cub->player.plane_y * MOVE_SPEED;
+		//handle_collision(cub, next_x, next_y);
 	}
-	if (cub->keys.s)
+	else if (cub->keys.s)
 	{
-		next_x = cub->player.x - cub->player.dir_x * speed;
-		next_y = cub->player.y - cub->player.dir_y * speed;
-		handle_collision(cub, next_x, next_y);
+		next_x = cub->player.x - cub->player.dir_x * MOVE_SPEED;
+		next_y = cub->player.y - cub->player.dir_y * MOVE_SPEED;
+		//handle_collision(cub, next_x, next_y);
 	}
-	if (cub->keys.d)
+	else if (cub->keys.d)
 	{
-		next_x = cub->player.x + cub->player.plane_x * speed;
-		next_y = cub->player.y + cub->player.plane_y * speed;
-		handle_collision(cub, next_x, next_y);
+		next_x = cub->player.x + cub->player.plane_x * MOVE_SPEED;
+		next_y = cub->player.y + cub->player.plane_y * MOVE_SPEED;
+		//handle_collision(cub, next_x, next_y);
 	}
+	handle_collision(cub, next_x, next_y);
 	return (0);
 }
 
