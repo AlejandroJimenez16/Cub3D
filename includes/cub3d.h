@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/16 18:55:46 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/18 17:13:48 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@
 # define LEFT_KEY 65361 
 # define RIGHT_KEY 65363
 
-
 typedef struct s_map
 {
 	char	**grid;
@@ -75,38 +74,31 @@ typedef struct s_draw
 
 typedef struct s_img
 {
-	void	*img_ptr;       // The pointer to the loaded image
-	char	*addr;          // The raw memory address of the pixels
-	int		width;          // Texture width (e.g., 64)
-	int		height;         // Texture height (e.g., 64)
-	int		bpp;            // Bits per pixel
-	int		line_length;    // How many bytes are in a single row of the image
+	void	*img_ptr;		// The pointer to the loaded image
+	char	*addr;			// The raw memory address of the pixels
+	int		width;			// Texture width (e.g., 64)
+	int		height;			// Texture height (e.g., 64)
+	int		bpp;			// Bits per pixel
+	int		line_length;	// How many bytes are in a single row of the image
 	int		endian;
-}   t_img;
+}			t_img;
 
 // Ray info
 typedef struct s_ray
 {
-	double	camera_x;		// Escala que determina la inclinacion de cada rayo (Izq: -1, Centro: 0, Derecha: 1)
+	double	camera_x;		// Determina inclinacion de cada rayo (-1 a 1)
 	double	ray_dir_x;		// Direccion del rayo (eje X)
 	double	ray_dir_y;		// Direccion del rayo (eje Y)
-	
-	int	map_x;				// Posicion X del rayo en el mapa
-	int	map_y;				// Posicion X del rayo en el mapa
-	
-	double	delta_dist_x;	// Distancia que recorre el rayo para avanzar 1 unidad (eje X)
-	double	delta_dist_y;	// Distancia que recorre el rayo para avanzar 1 unidad (eje Y)
-	
-	double	side_dist_x;	// Distancia que hay desde pj hasta donde esta ahora mismo el rayo (eje X)
-	double	side_dist_y;	// Distancia que hay desde pj hasta donde esta ahora mismo el rayo (eje Y)
-
-	int		step_x;			// Hacia donde va el rayo (Izq: -1, Der: 1, Arriba: -1, Abajo: 1)
+	int		map_x;			// Posicion X del rayo en el mapa
+	int		map_y;			// Posicion X del rayo en el mapa
+	double	delta_dist_x;	// Distancia que recorre el rayo en 1 unidad (eje X)
+	double	delta_dist_y;	// Distancia que recorre el rayo en 1 unidad (eje Y)
+	double	side_dist_x;	// Distancia desde el pj hasta el rayo (eje X)
+	double	side_dist_y;	// Distancia desde el pj hasta el rayo (eje Y)
+	int		step_x;			// Hacia donde va el rayo
 	int		step_y;
-
-	int		side;			// Indica con que cara de la pared se ha chocado (cara: norte/sur, cara: este/oeste)
-
+	int		side;			// Indica ara de la pared con la que choca
 	double	real_dist;		// Distancia real
-
 	double	hit_x;			// Punto donde choca con la pared
 	double	hit_y;
 }			t_ray;

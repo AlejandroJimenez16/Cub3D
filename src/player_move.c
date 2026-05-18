@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:50:52 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/16 19:39:09 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/05/18 17:02:19 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,82 +41,48 @@ static void	handle_collision(t_cub *cub, double next_x, double next_y)
 	}
 }
 
-static int	move_diagonal(t_cub *cub, double next_x, double next_y)
-{
-	double	next_x_vert;
-	double	next_y_vert;
-	double	next_x_side;
-	double	next_y_side;
-	double	speed;
-
-	if ((cub->keys.w || cub->keys.s) && (cub->keys.a || cub->keys.d))
-	{
-		speed = MOVE_SPEED * 0.707;
-		next_x_vert = cub->player.dir_x * speed;
-		next_y_vert = cub->player.dir_y * speed;
-		next_x_side = cub->player.plane_x * speed;
-		next_y_side = cub->player.plane_y * speed;
-		if (cub->keys.w && cub->keys.a)
-		{
-			next_x = cub->player.x + next_x_vert - next_x_side;
-			next_y = cub->player.y + next_y_vert - next_y_side;
-		}
-		else if (cub->keys.w && cub->keys.d)
-		{
-			next_x = cub->player.x + next_x_vert + next_x_side;
-			next_y = cub->player.y + next_y_vert + next_y_side;
-		}
-		else if (cub->keys.s && cub->keys.a)
-		{
-			next_x = cub->player.x - next_x_vert - next_x_side;
-			next_y = cub->player.y - next_y_vert - next_y_side;
-		}
-		else if (cub->keys.s && cub->keys.d)
-		{
-			next_x = cub->player.x - next_x_vert + next_x_side;
-			next_y = cub->player.y - next_y_vert + next_y_side;
-		}
-		handle_collision(cub, next_x, next_y);
-		return (1);
-	}
-	return (0);
-}
-
-static void	move_simple(t_cub *cub, double next_x, double next_y)
+static void	apply_move(t_cub *cub, double *move_x, double *move_y, double speed)
 {
 	if (cub->keys.w)
 	{
-		next_x = cub->player.x + cub->player.dir_x * MOVE_SPEED;
-		next_y = cub->player.y + cub->player.dir_y * MOVE_SPEED;
-	}
-	if (cub->keys.a)
-	{
-		next_x = cub->player.x - cub->player.plane_x * MOVE_SPEED;
-		next_y = cub->player.y - cub->player.plane_y * MOVE_SPEED;
+		*move_x += cub->player.dir_x * speed;
+		*move_y += cub->player.dir_y * speed;
 	}
 	if (cub->keys.s)
 	{
-		next_x = cub->player.x - cub->player.dir_x * MOVE_SPEED;
-		next_y = cub->player.y - cub->player.dir_y * MOVE_SPEED;
+		*move_x -= cub->player.dir_x * speed;
+		*move_y -= cub->player.dir_y * speed;
+	}
+	if (cub->keys.a)
+	{
+		*move_x -= cub->player.plane_x * speed;
+		*move_y -= cub->player.plane_y * speed;
 	}
 	if (cub->keys.d)
 	{
-		next_x = cub->player.x + cub->player.plane_x * MOVE_SPEED;
-		next_y = cub->player.y + cub->player.plane_y * MOVE_SPEED;
+		*move_x += cub->player.plane_x * speed;
+		*move_y += cub->player.plane_y * speed;
 	}
-	handle_collision(cub, next_x, next_y);
 }
 
 int	move_player(t_cub *cub)
 {
+	double	move_x;
+	double	move_y;
 	double	next_x;
 	double	next_y;
+	double	speed;
 
-	next_x = cub->player.x;
-	next_y = cub->player.y;
-	if (move_diagonal(cub, next_x, next_y))
-		return (0);
-	move_simple(cub, next_x, next_y);
+	if ((cub->keys.w || cub->keys.s) && (cub->keys.a || cub->keys.d))
+		speed = MOVE_SPEED * 0.707;
+	else
+		speed = MOVE_SPEED;
+	move_x = 0;
+	move_y = 0;
+	apply_move(cub, &move_x, &move_y, speed);
+	next_x = cub->player.x + move_x;
+	next_y = cub->player.y + move_y;
+	handle_collision(cub, next_x, next_y);
 	return (0);
 }
 
