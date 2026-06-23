@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/06/23 13:56:45 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/23 19:27:16 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,12 +184,15 @@ int		move_chamera(t_cub *cub);
 void	rotate_player(t_player *player, double speed);
 
 // raycast_bonus.c
+void	init_side_dist(t_ray *ray, t_cub *cub);
+void	init_ray(t_ray *ray, t_cub *cub, int px);
+int		advance_ray(t_ray *ray, t_cub *cub);
 int		raycast_loop(t_cub *cub);
 
-// render_bonus.c
+// minimap_bonus.c
+void	draw_ray_line(t_cub *cub, t_ray *ray, int color);
+void	draw_raycast_lines(t_cub *cub);
 void	draw_minimap(t_cub *cub);
-//void	draw_ray(t_cub *cub, t_ray *ray, int color);
-//void	draw_2d_map(t_cub *cub);
 
 // render3d_bonus.c
 void	draw_vertical_line(t_cub *cub, t_ray *ray, int x);

@@ -17,7 +17,7 @@ SRCS		= src/main_bonus.c					\
 			  src/events_bonus.c				\
 			  src/player_move_bonus.c			\
 			  src/raycast_bonus.c				\
-			  src/render_bonus.c				\
+			  src/minimap_bonus.c				\
 			  src/render3d_bonus.c				\
 			  src/game_loop_bonus.c
 

@@ -6,13 +6,13 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 20:50:36 by alejandj          #+#    #+#             */
-/*   Updated: 2026/06/23 13:28:48 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/23 19:35:34 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
-static void	init_side_dist(t_ray *ray, t_cub *cub)
+void	init_side_dist(t_ray *ray, t_cub *cub)
 {
 	if (ray->ray_dir_x < 0)
 	{
@@ -38,7 +38,7 @@ static void	init_side_dist(t_ray *ray, t_cub *cub)
 	}
 }
 
-static void	init_ray(t_ray *ray, t_cub *cub, int px)
+void	init_ray(t_ray *ray, t_cub *cub, int px)
 {
 	ray->camera_x = 2 * px / (double)WIDTH - 1;
 	ray->ray_dir_x = cub->player.dir_x + (cub->player.plane_x * ray->camera_x);
@@ -51,7 +51,7 @@ static void	init_ray(t_ray *ray, t_cub *cub, int px)
 	ray->real_dist = 0;
 }
 
-static int	advance_ray(t_ray *ray, t_cub *cub)
+int	advance_ray(t_ray *ray, t_cub *cub)
 {
 	int	hit;
 
@@ -94,10 +94,8 @@ int	raycast_loop(t_cub *cub)
 		ray.hit_y = cub->player.y + (ray.ray_dir_y * ray.real_dist);
 		draw_vertical_line(cub, &ray, i);
 	}
-	
-	// Minimapa
 	draw_minimap(cub);
-	
+	draw_raycast_lines(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img_ptr, 0, 0);
 	return (0);
 }
