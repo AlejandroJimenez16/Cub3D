@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_move.c                                      :+:      :+:    :+:   */
+/*   player_move_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:50:52 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/11 14:25:14 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/23 12:35:43 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,52 +16,72 @@
 
 static void	handle_collision(t_cub *cub, double next_x, double next_y)
 {
-	
-	if (cub->map.grid[(int)(cub->player.y - OFFSET)][(int)(next_x - OFFSET)] != '1'
-		&& cub->map.grid[(int)(cub->player.y - OFFSET)][(int)(next_x + OFFSET)] != '1'
-		&& cub->map.grid[(int)(cub->player.y + OFFSET)][(int)(next_x - OFFSET)] != '1'
-		&& cub->map.grid[(int)(cub->player.y + OFFSET)][(int)(next_x + OFFSET)] != '1')
+	if (cub->map.grid[(int)(cub->player.y - OFFSET)]
+			[(int)(next_x - OFFSET)] != '1'
+		&& cub->map.grid[(int)(cub->player.y - OFFSET)]
+			[(int)(next_x + OFFSET)] != '1'
+		&& cub->map.grid[(int)(cub->player.y + OFFSET)]
+			[(int)(next_x - OFFSET)] != '1'
+		&& cub->map.grid[(int)(cub->player.y + OFFSET)]
+			[(int)(next_x + OFFSET)] != '1')
 	{
 		cub->player.x = next_x;
 	}
-	if (cub->map.grid[(int)(next_y - OFFSET)][(int)(cub->player.x - OFFSET)] != '1'
-		&& cub->map.grid[(int)(next_y + OFFSET)][(int)(cub->player.x - OFFSET)] != '1'
-		&& cub->map.grid[(int)(next_y - OFFSET)][(int)(cub->player.x + OFFSET)] != '1'
-		&& cub->map.grid[(int)(next_y + OFFSET)][(int)(cub->player.x + OFFSET)] != '1')
+	if (cub->map.grid[(int)(next_y - OFFSET)]
+			[(int)(cub->player.x - OFFSET)] != '1'
+		&& cub->map.grid[(int)(next_y + OFFSET)]
+			[(int)(cub->player.x - OFFSET)] != '1'
+		&& cub->map.grid[(int)(next_y - OFFSET)]
+			[(int)(cub->player.x + OFFSET)] != '1'
+		&& cub->map.grid[(int)(next_y + OFFSET)]
+			[(int)(cub->player.x + OFFSET)] != '1')
 	{
 		cub->player.y = next_y;
 	}
 }
 
-int	move_player(t_cub *cub)
+static void	apply_move(t_cub *cub, double *move_x, double *move_y, double speed)
 {
-	double	next_x;
-	double	next_y;
-
 	if (cub->keys.w)
 	{
-		next_x = cub->player.x + cub->player.dir_x * MOVE_SPEED;
-		next_y = cub->player.y + cub->player.dir_y * MOVE_SPEED;
-		handle_collision(cub, next_x, next_y);
-	}	
-	if (cub->keys.a)
-	{
-		next_x = cub->player.x - cub->player.plane_x * MOVE_SPEED;
-		next_y = cub->player.y - cub->player.plane_y * MOVE_SPEED;
-		handle_collision(cub, next_x, next_y);
+		*move_x += cub->player.dir_x * speed;
+		*move_y += cub->player.dir_y * speed;
 	}
 	if (cub->keys.s)
 	{
-		next_x = cub->player.x - cub->player.dir_x * MOVE_SPEED;
-		next_y = cub->player.y - cub->player.dir_y * MOVE_SPEED;
-		handle_collision(cub, next_x, next_y);
+		*move_x -= cub->player.dir_x * speed;
+		*move_y -= cub->player.dir_y * speed;
+	}
+	if (cub->keys.a)
+	{
+		*move_x -= cub->player.plane_x * speed;
+		*move_y -= cub->player.plane_y * speed;
 	}
 	if (cub->keys.d)
 	{
-		next_x = cub->player.x + cub->player.plane_x * MOVE_SPEED;
-		next_y = cub->player.y + cub->player.plane_y * MOVE_SPEED;
-		handle_collision(cub, next_x, next_y);
+		*move_x += cub->player.plane_x * speed;
+		*move_y += cub->player.plane_y * speed;
 	}
+}
+
+int	move_player(t_cub *cub)
+{
+	double	move_x;
+	double	move_y;
+	double	next_x;
+	double	next_y;
+	double	speed;
+
+	if ((cub->keys.w || cub->keys.s) && (cub->keys.a || cub->keys.d))
+		speed = MOVE_SPEED * 0.707;
+	else
+		speed = MOVE_SPEED;
+	move_x = 0;
+	move_y = 0;
+	apply_move(cub, &move_x, &move_y, speed);
+	next_x = cub->player.x + move_x;
+	next_y = cub->player.y + move_y;
+	handle_collision(cub, next_x, next_y);
 	return (0);
 }
 

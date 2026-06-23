@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.c                                           :+:      :+:    :+:   */
+/*   events_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 13:24:57 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/08 21:25:03 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/23 12:23:17 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,12 @@ int	mouse_hook(int x, int y, t_cub *cub)
 	int		delta_x;
 	double	angle;
 
-	(void)y; // Silences the unused variable warning
-	
-	// 1. Filter out the artificial recentering events
+	(void)y;
 	if (x == WIDTH / 2)
 		return (0);
-		
-	// 2. Calculate drift and rotate
 	delta_x = x - WIDTH / 2;
 	angle = delta_x * MOUSE_SENS;
 	rotate_player(&cub->player, angle);
-	
-	// 3. Force the cursor back to the center for the next real move
 	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);
 	return (0);
 }

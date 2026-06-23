@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validation.c                                   :+:      :+:    :+:   */
+/*   map_validation_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:54:37 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/08 20:48:05 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/23 12:13:04 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,27 @@
 */
 static void	initialize_player(t_cub *cub, char player_c, int x, int y)
 {
-	if (player_c == 'N')
-	{
-		cub->player.dir_x = 0;
-		cub->player.dir_y = -1;
-		cub->player.plane_x = 0.66;
-		cub->player.plane_y = 0;
-	}
-	else if (player_c == 'S')
+	if (player_c == 'N' || player_c == 'S')
 	{
 		cub->player.dir_x = 0;
 		cub->player.dir_y = 1;
-		cub->player.plane_x = -0.66;
+		cub->player.plane_x = 0.66;
 		cub->player.plane_y = 0;
 	}
-	else if (player_c == 'E')
+	else if (player_c == 'E' || player_c == 'W')
 	{
 		cub->player.dir_x = 1;
 		cub->player.dir_y = 0;
 		cub->player.plane_x = 0;
 		cub->player.plane_y = 0.66;
 	}
+	if (player_c == 'N')
+		cub->player.dir_y = -1;
+	else if (player_c == 'S')
+		cub->player.plane_x = -0.66;
 	else if (player_c == 'W')
 	{
 		cub->player.dir_x = -1;
-		cub->player.dir_y = 0;
-		cub->player.plane_x = 0;
 		cub->player.plane_y = -0.66;
 	}
 	cub->player.x = x + 0.5;
