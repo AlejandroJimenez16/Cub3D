@@ -1,17 +1,76 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 12:12:12 by alejandj          #+#    #+#             */
-/*   Updated: 2026/04/29 13:54:19 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/23 17:07:53 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
 
+static void	draw_square(t_cub *cub, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < MAP_SIZE)
+	{
+		j = 0;
+		while (j < MAP_SIZE)
+		{
+			my_mlx_pixel_put(&cub->screen, x + j, y + i, color);
+			j++;
+		}
+		i++;
+	}
+}
+
+void	draw_minimap(t_cub *cub)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < cub->map.height)
+	{
+		x = 0;
+		while (x < cub->map.width)
+		{
+			if (cub->map.grid[y][x] == '1')
+				draw_square(cub, x * MAP_SIZE, y * MAP_SIZE, 0x0078FF);
+			else if (cub->map.grid[y][x] == '0' || cub->map.grid[y][x] == 'N'
+					|| cub->map.grid[y][x] == 'S' || cub->map.grid[y][x] == 'W'
+					|| cub->map.grid[y][x] == 'E')
+				draw_square(cub, x * MAP_SIZE, y * MAP_SIZE, 0x1E1E1E);
+			x++;
+		}
+		y++;
+	}
+	draw_square(cub, (cub->player.x * MAP_SIZE) - MAP_SIZE / 2,
+		(cub->player.y * MAP_SIZE) - MAP_SIZE / 2, 0x00FF64);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 static void	draw_square(t_cub *cub, int x, int y, int color)
 {
 	int	i;
@@ -90,7 +149,7 @@ void	draw_2d_map(t_cub *cub)
 	}
 	draw_square(cub, (cub->player.x * TILE_SIZE) - TILE_SIZE / 2, (cub->player.y * TILE_SIZE) - TILE_SIZE / 2, 0xFFFF00);
 }
-/*
+
 void	draw_vertical_line(t_cub *cub, t_ray *ray, int x) 
 {
 	int		line_height;

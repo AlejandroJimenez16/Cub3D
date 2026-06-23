@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast.c                                          :+:      :+:    :+:   */
+/*   raycast_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 20:50:36 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/08 19:23:30 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/23 13:28:48 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,10 @@ int	raycast_loop(t_cub *cub)
 		ray.hit_y = cub->player.y + (ray.ray_dir_y * ray.real_dist);
 		draw_vertical_line(cub, &ray, i);
 	}
+	
+	// Minimapa
+	draw_minimap(cub);
+	
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->screen.img_ptr, 0, 0);
 	return (0);
 }

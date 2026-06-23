@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/06/23 12:11:49 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/23 13:56:45 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdio.h>
 
 # define WIDTH 800
 # define HEIGHT 600
+
 # define TILE_SIZE 16
+# define MAP_SIZE 8
 # define TEX_HEIGHT 64
 # define TEX_WIDTH 64
+
 # define NO 0
 # define SO 1
 # define EA 2
@@ -151,48 +155,49 @@ typedef struct s_cub
 // debug.c (Must erase at end)
 void	print_cub_debug(t_cub *cub);
 
-// file_parser.c
+// file_parser_bonus.c
 void	check_file_extension(const char *path);
 void	parse_file(int fd, t_cub *cub);
 
-// map_extraction.c
+// map_extraction_bonus.c
 void	extract_map_line(char *line, t_cub *cub);
 void	pad_map(t_cub *cub);
 
-// map_validation.c
+// map_validation_bonus.c
 void	validate_cub_map(t_cub *cub);
 
-// set_visuals.c
+// set_visuals_bonus.c
 int		parse_element(char *line, t_cub *cub);
 
-// window.c
+// window_bonus.c
 int		create_window(t_cub *cub);
 int		close_window(t_cub *cub);
 
-// events.c
+// events_bonus.c
 int		handle_key_press(int keycode, void *param);
 int		handle_key_release(int keycode, void *param);
 int		mouse_hook(int x, int y, t_cub *cub);
 
-// player_move.c
+// player_move_bonus.c
 int		move_player(t_cub *cub);
 int		move_chamera(t_cub *cub);
 void	rotate_player(t_player *player, double speed);
 
-// raycast.c
+// raycast_bonus.c
 int		raycast_loop(t_cub *cub);
 
-// render.c
-void	draw_ray(t_cub *cub, t_ray *ray, int color);
-void	draw_2d_map(t_cub *cub);
+// render_bonus.c
+void	draw_minimap(t_cub *cub);
+//void	draw_ray(t_cub *cub, t_ray *ray, int color);
+//void	draw_2d_map(t_cub *cub);
 
-// render3d.c
+// render3d_bonus.c
 void	draw_vertical_line(t_cub *cub, t_ray *ray, int x);
 
-// game_loop.c
+// game_loop_bonus.c
 int		game_loop(void *param);
 
-// cub3d_utils.c
+// cub3d_utils_bonus.c
 void	free_cub(t_cub *cub);
 void	err_exit(t_cub *cub, char *message);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
