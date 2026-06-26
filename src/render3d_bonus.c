@@ -26,14 +26,19 @@ static int	get_wall_pixel_color(t_cub *cub, t_ray *ray, int tex_x, int tex_y)
 {
 	t_img	*tex;
 
-	if (ray->side == 0 && ray->ray_dir_x > 0)
-		tex = &cub->textures[EA];
-	else if (ray->side == 0 && ray->ray_dir_x < 0)
-		tex = &cub->textures[WE];
-	else if (ray->side == 1 && ray->ray_dir_y > 0)
-		tex = &cub->textures[SO];
+	if (!ray->is_door)
+	{
+		if (ray->side == 0 && ray->ray_dir_x > 0)
+			tex = &cub->textures[EA];
+		else if (ray->side == 0 && ray->ray_dir_x < 0)
+			tex = &cub->textures[WE];
+		else if (ray->side == 1 && ray->ray_dir_y > 0)
+			tex = &cub->textures[SO];
+		else
+			tex = &cub->textures[NO];
+	}
 	else
-		tex = &cub->textures[NO];
+		tex = &cub->textures[OPEN];
 	return (get_texture_pixel(tex, tex_x, tex_y));
 }
 

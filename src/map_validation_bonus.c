@@ -60,7 +60,7 @@ static int	check_chars_and_player(t_cub *cub)
 		x = -1;
 		while (cub->map.grid[y][++x])
 		{
-			if (!ft_strchr("01 NSEW", cub->map.grid[y][x]))
+			if (!ft_strchr("01D NSEW", cub->map.grid[y][x]))
 				return (0);
 			player_c = ft_strchr("NSEW", cub->map.grid[y][x]);
 			if (player_c)

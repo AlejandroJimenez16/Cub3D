@@ -49,6 +49,7 @@ void	init_ray(t_ray *ray, t_cub *cub, int px)
 	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 	init_side_dist(ray, cub);
 	ray->real_dist = 0;
+	ray->is_door = 0;
 }
 
 int	advance_ray(t_ray *ray, t_cub *cub)
@@ -69,7 +70,15 @@ int	advance_ray(t_ray *ray, t_cub *cub)
 		ray->side = 1;
 	}
 	if (cub->map.grid[ray->map_y][ray->map_x] == '1')
+	{
 		hit = 1;
+		ray->is_door = 0;
+	}
+	if (cub->map.grid[ray->map_y][ray->map_x] == 'D')
+	{
+		hit = 1;
+		ray->is_door = 1;
+	}
 	return (hit);
 }
 

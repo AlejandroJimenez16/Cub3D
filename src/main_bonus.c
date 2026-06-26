@@ -42,6 +42,7 @@ static void	init_cub(t_cub *cub)
 	cub->keys.d = 0;
 	cub->keys.left = 0;
 	cub->keys.right = 0;
+	cub->open_door = "./textures/door.xpm";
 }
 
 static void	load_texture(t_cub *cub, int index, char *path)
@@ -82,14 +83,24 @@ static void	run_game(t_cub *cub)
 	load_texture(cub, SO, cub->so_path);
 	load_texture(cub, EA, cub->ea_path);
 	load_texture(cub, WE, cub->we_path);
+	load_texture(cub, OPEN, cub->open_door);
+
 	ft_printf("Map and config loaded successfully! Starting game...\n");
 	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);
 	mlx_mouse_hide(cub->mlx, cub->win);
+	/*
 	mlx_hook(cub->win, 2, 1L << 0, handle_key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, handle_key_release, cub);
 	mlx_hook(cub->win, 6, 1L << 6, mouse_hook, cub);
 	mlx_hook(cub->win, 17, 0, close_window, cub);
 	mlx_loop_hook(cub->mlx, game_loop, cub);
+	*/
+
+	mlx_hook(cub->win, 2, 1L << 0, (int (*)())(void *)handle_key_press, cub);
+	mlx_hook(cub->win, 3, 1L << 1, (int (*)())(void *)handle_key_release, cub);
+	mlx_hook(cub->win, 6, 1L << 6, (int (*)())(void *)mouse_hook, cub);
+	mlx_hook(cub->win, 17, 0,      (int (*)())(void *)close_window, cub);
+	mlx_loop_hook(cub->mlx,        (int (*)())(void *)game_loop, cub);
 	mlx_loop(cub->mlx);
 }
 

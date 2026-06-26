@@ -33,10 +33,12 @@
 # define SO 1
 # define EA 2
 # define WE 3
+# define OPEN 4
+# define CLOSE 5
 
 # define MOVE_SPEED 0.03
 # define ROT_SPEED 0.01
-# define MOUSE_SENS 0.0003
+# define MOUSE_SENS 0.0015
 
 # define ESC 65307
 
@@ -106,6 +108,7 @@ typedef struct s_ray
 	double	real_dist;		// Distancia real
 	double	hit_x;			// Punto donde choca con la pared
 	double	hit_y;
+	int		is_door;
 }			t_ray;
 
 // Elements to draw ray
@@ -141,12 +144,14 @@ typedef struct s_cub
 	char		*so_path;
 	char		*we_path;
 	char		*ea_path;
+	char		*open_door;
+	//char		*close_door;
 	int			floor_color;
 	int			ceiling_color;
 	int			elements_found; // Tracks if we hit the magic number 6
 	t_map		map;
 	t_player	player;
-	t_img		textures[4]; // 0: North, 1: South, 2: East, 3: West
+	t_img		textures[6]; // 0: North, 1: South, 2: East, 3: West, 4: Open_door, 5: Close_door
 	void		*mlx;
 	void		*win;
 	t_keys		keys;
