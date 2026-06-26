@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:59 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/08 21:32:30 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/06/26 17:51:57 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_cub(t_cub *cub)
 	cub->keys.d = 0;
 	cub->keys.left = 0;
 	cub->keys.right = 0;
-	cub->open_door = "./textures/door.xpm";
+	cub->open_door = "./textures/test_door_a.xpm";
 }
 
 static void	load_texture(t_cub *cub, int index, char *path)
