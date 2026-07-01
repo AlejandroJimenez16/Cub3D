@@ -3,8 +3,8 @@ SO ./textures/test_brick.xpm
 WE ./textures/test_brick.xpm
 EA ./textures/test_brick.xpm
 
-F 220,100,0
-C 225,30,0
+F 30,30,45
+C 5,20,30
 
         1111111111111111111111111
         1000000000110000000000001

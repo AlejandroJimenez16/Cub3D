@@ -38,7 +38,12 @@ static int	get_wall_pixel_color(t_cub *cub, t_ray *ray, int tex_x, int tex_y)
 			tex = &cub->textures[NO];
 	}
 	else
-		tex = &cub->textures[OPEN];
+	{
+		if (cub->is_closed)
+			tex = &cub->textures[CLOSE];
+		else
+			tex = &cub->textures[OPEN];
+	}
 	return (get_texture_pixel(tex, tex_x, tex_y));
 }
 

@@ -23,7 +23,12 @@ static void	handle_collision(t_cub *cub, double next_x, double next_y)
 		&& cub->map.grid[(int)(cub->player.y + OFFSET)]
 			[(int)(next_x - OFFSET)] != '1'
 		&& cub->map.grid[(int)(cub->player.y + OFFSET)]
-			[(int)(next_x + OFFSET)] != '1')
+			[(int)(next_x + OFFSET)] != '1'
+		&& (cub->map.grid[(int)(cub->player.y - OFFSET)]
+			[(int)(next_x - OFFSET)] != 'D' || !cub->is_closed)
+		&& (cub->map.grid[(int)(cub->player.y + OFFSET)]
+			[(int)(next_x + OFFSET)] != 'D' || !cub->is_closed))
+			
 	{
 		cub->player.x = next_x;
 	}
@@ -34,7 +39,11 @@ static void	handle_collision(t_cub *cub, double next_x, double next_y)
 		&& cub->map.grid[(int)(next_y - OFFSET)]
 			[(int)(cub->player.x + OFFSET)] != '1'
 		&& cub->map.grid[(int)(next_y + OFFSET)]
-			[(int)(cub->player.x + OFFSET)] != '1')
+			[(int)(cub->player.x + OFFSET)] != '1'
+		&& (cub->map.grid[(int)(next_y - OFFSET)]
+			[(int)(cub->player.x - OFFSET)] != 'D' || cub->is_closed == 0)
+		&& (cub->map.grid[(int)(next_y + OFFSET)]
+			[(int)(cub->player.x + OFFSET)] != 'D' || cub->is_closed == 0))
 	{
 		cub->player.y = next_y;
 	}

@@ -17,7 +17,7 @@ static void	destroy_img(t_cub *cub)
 	int	j;
 
 	j = 0;
-	while (j < 4)
+	while (j < 6)
 	{
 		if (cub->textures[j].img_ptr)
 			mlx_destroy_image(cub->mlx, cub->textures[j].img_ptr);

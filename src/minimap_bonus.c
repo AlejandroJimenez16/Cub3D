@@ -98,6 +98,8 @@ void	draw_minimap(t_cub *cub)
 					|| cub->map.grid[y][x] == 'S' || cub->map.grid[y][x] == 'W'
 					|| cub->map.grid[y][x] == 'E')
 				draw_square(cub, x * MAP_SIZE, y * MAP_SIZE, 0x1E1E1E);
+			else if (cub->map.grid[y][x] == 'D')
+				draw_square(cub, x * MAP_SIZE, y * MAP_SIZE, 0x9400D3);
 			x++;
 		}
 		y++;

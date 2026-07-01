@@ -42,7 +42,9 @@ static void	init_cub(t_cub *cub)
 	cub->keys.d = 0;
 	cub->keys.left = 0;
 	cub->keys.right = 0;
-	cub->open_door = "./textures/test_door_a.xpm";
+	cub->open_door = "./textures/test_door_open.xpm";
+	cub->close_door = "./textures/test_door_close.xpm";
+	cub->is_closed = 1;
 }
 
 static void	load_texture(t_cub *cub, int index, char *path)
@@ -84,6 +86,7 @@ static void	run_game(t_cub *cub)
 	load_texture(cub, EA, cub->ea_path);
 	load_texture(cub, WE, cub->we_path);
 	load_texture(cub, OPEN, cub->open_door);
+	load_texture(cub, CLOSE, cub->close_door);
 
 	ft_printf("Map and config loaded successfully! Starting game...\n");
 	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);

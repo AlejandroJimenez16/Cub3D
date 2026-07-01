@@ -50,6 +50,8 @@
 # define LEFT_KEY 65361 
 # define RIGHT_KEY 65363
 
+#define KEY_SPACE 32
+
 typedef struct s_map
 {
 	char	**grid;
@@ -145,7 +147,7 @@ typedef struct s_cub
 	char		*we_path;
 	char		*ea_path;
 	char		*open_door;
-	//char		*close_door;
+	char		*close_door;
 	int			floor_color;
 	int			ceiling_color;
 	int			elements_found; // Tracks if we hit the magic number 6
@@ -155,6 +157,7 @@ typedef struct s_cub
 	void		*mlx;
 	void		*win;
 	t_keys		keys;
+	int			is_closed;
 }				t_cub;
 
 // debug.c (Must erase at end)

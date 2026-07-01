@@ -31,6 +31,8 @@ int	handle_key_press(int keycode, void *param)
 		cub->keys.left = 1;
 	else if (keycode == RIGHT_KEY)
 		cub->keys.right = 1;
+	else if (keycode == KEY_SPACE)
+		cub->is_closed = !cub->is_closed;
 	return (0);
 }
 
