@@ -6,13 +6,11 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 18:48:55 by alejandj          #+#    #+#             */
-/*   Updated: 2026/07/09 19:11:20 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/09 19:35:41 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
-
-#define OFFSET 0.2
 
 static void	collision_x(t_cub *cub, double next_x)
 {

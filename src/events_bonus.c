@@ -6,11 +6,23 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 13:24:57 by alejandj          #+#    #+#             */
-/*   Updated: 2026/06/23 12:23:17 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/09 19:46:25 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d_bonus.h"
+
+static int	is_in_door(t_cub *cub)
+{
+	if (cub->map.grid[(int)(cub->player.y - OFFSET)]
+			[(int)(cub->player.x - OFFSET)] == 'D'
+		|| cub->map.grid[(int)(cub->player.y + OFFSET)]
+			[(int)(cub->player.x + OFFSET)] == 'D')
+	{
+		return (1);
+	}
+	return (0);
+}
 
 int	handle_key_press(int keycode, void *param)
 {
@@ -32,7 +44,11 @@ int	handle_key_press(int keycode, void *param)
 	else if (keycode == RIGHT_KEY)
 		cub->keys.right = 1;
 	else if (keycode == KEY_SPACE)
+	{
+		if (is_in_door(cub))
+			return (1);
 		cub->is_closed = !cub->is_closed;
+	}
 	return (0);
 }
 

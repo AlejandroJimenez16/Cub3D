@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/07/09 18:52:16 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/09 19:40:15 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define MAP_SIZE 8
 # define TEX_HEIGHT 64
 # define TEX_WIDTH 64
+
+# define OFFSET 0.2
 
 # define NO 0
 # define SO 1
