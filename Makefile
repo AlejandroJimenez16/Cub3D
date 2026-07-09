@@ -7,6 +7,7 @@ CFLAGS		= -Wall -Wextra -Werror -g -Iincludes -I$(MINILIBXDIR)
 
 # Sources (Add your specific files here)
 SRCS		= src/main_bonus.c					\
+			  src/main_utils_bonus.c			\
 			  src/map_extraction_bonus.c		\
 			  src/map_validation_bonus.c		\
 			  src/file_parser_bonus.c			\
@@ -16,6 +17,7 @@ SRCS		= src/main_bonus.c					\
 			  src/window_bonus.c				\
 			  src/events_bonus.c				\
 			  src/player_move_bonus.c			\
+			  src/collision_bonus.c				\
 			  src/raycast_bonus.c				\
 			  src/minimap_bonus.c				\
 			  src/render3d_bonus.c				\

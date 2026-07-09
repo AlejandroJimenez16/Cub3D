@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/06/23 19:27:16 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/09 18:52:16 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # define OPEN 4
 # define CLOSE 5
 
-# define MOVE_SPEED 0.03
+# define MOVE_SPEED 0.06
 # define ROT_SPEED 0.01
 # define MOUSE_SENS 0.0015
 
@@ -50,7 +50,7 @@
 # define LEFT_KEY 65361 
 # define RIGHT_KEY 65363
 
-#define KEY_SPACE 32
+# define KEY_SPACE 32
 
 typedef struct s_map
 {
@@ -99,14 +99,14 @@ typedef struct s_ray
 	double	ray_dir_x;		// Direccion del rayo (eje X)
 	double	ray_dir_y;		// Direccion del rayo (eje Y)
 	int		map_x;			// Posicion X del rayo en el mapa
-	int		map_y;			// Posicion X del rayo en el mapa
+	int		map_y;			// Posicion Y del rayo en el mapa
 	double	delta_dist_x;	// Distancia que recorre el rayo en 1 unidad (eje X)
 	double	delta_dist_y;	// Distancia que recorre el rayo en 1 unidad (eje Y)
-	double	side_dist_x;	// Distancia desde el pj hasta el rayo (eje X)
-	double	side_dist_y;	// Distancia desde el pj hasta el rayo (eje Y)
-	int		step_x;			// Hacia donde va el rayo
+	double	side_dist_x;	// Distancia del rayo al siguiente borde de la celda
+	double	side_dist_y;
+	int		step_x;			// Paso que avanza el rayo cuando no choca
 	int		step_y;
-	int		side;			// Indica ara de la pared con la que choca
+	int		side;			// Indica la pared con la que choca
 	double	real_dist;		// Distancia real
 	double	hit_x;			// Punto donde choca con la pared
 	double	hit_y;
@@ -153,7 +153,7 @@ typedef struct s_cub
 	int			elements_found; // Tracks if we hit the magic number 6
 	t_map		map;
 	t_player	player;
-	t_img		textures[6]; // 0: North, 1: South, 2: East, 3: West, 4: Open_door, 5: Close_door
+	t_img		textures[6]; // 0: N, 1: S, 2: E, 3: W, 4: Open, 5: Close
 	void		*mlx;
 	void		*win;
 	t_keys		keys;
@@ -186,6 +186,9 @@ int		handle_key_press(int keycode, void *param);
 int		handle_key_release(int keycode, void *param);
 int		mouse_hook(int x, int y, t_cub *cub);
 
+// collision_bonus.c
+void	handle_collision(t_cub *cub, double next_x, double next_y);
+
 // player_move_bonus.c
 int		move_player(t_cub *cub);
 int		move_chamera(t_cub *cub);
@@ -207,6 +210,11 @@ void	draw_vertical_line(t_cub *cub, t_ray *ray, int x);
 
 // game_loop_bonus.c
 int		game_loop(void *param);
+
+// main_bonus.c
+void	init_cub(t_cub *cub);
+void	load_texture(t_cub *cub, int index, char *path);
+void	create_screen_load_textures(t_cub *cub);
 
 // cub3d_utils_bonus.c
 void	free_cub(t_cub *cub);

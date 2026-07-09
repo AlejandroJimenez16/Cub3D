@@ -70,15 +70,9 @@ int	advance_ray(t_ray *ray, t_cub *cub)
 		ray->side = 1;
 	}
 	if (cub->map.grid[ray->map_y][ray->map_x] == '1')
-	{
-		hit = 1;
-		ray->is_door = 0;
-	}
+		return (ray->is_door = 0, 1);
 	if (cub->map.grid[ray->map_y][ray->map_x] == 'D')
-	{
-		hit = 1;
-		ray->is_door = 1;
-	}
+		return (ray->is_door = 1, 1);
 	return (hit);
 }
 
