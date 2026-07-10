@@ -6,12 +6,11 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/05 19:50:52 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/18 17:02:19 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/09 20:07:25 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#include <stdio.h>
 
 #define OFFSET 0.2
 

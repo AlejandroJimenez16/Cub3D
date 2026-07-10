@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/18 17:13:48 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/09 20:11:01 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,21 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdio.h>
 
 # define WIDTH 800
 # define HEIGHT 600
+
 # define TILE_SIZE 16
 # define TEX_HEIGHT 64
 # define TEX_WIDTH 64
+
 # define NO 0
 # define SO 1
 # define EA 2
 # define WE 3
 
-# define MOVE_SPEED 0.03
+# define MOVE_SPEED 0.06
 # define ROT_SPEED 0.01
 
 # define ESC 65307
@@ -102,22 +105,6 @@ typedef struct s_ray
 	double	hit_x;			// Punto donde choca con la pared
 	double	hit_y;
 }			t_ray;
-
-// Elements to draw ray
-typedef struct s_line
-{
-	double	x1;
-	double	y1;
-	double	x2;
-	double	y2;
-	double	dx;
-	double	dy;
-	double	steps;
-	double	current_x;
-	double	current_y;
-	double	move_x;
-	double	move_y;
-}			t_line;
 
 typedef struct s_keys
 {
