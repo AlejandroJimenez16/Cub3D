@@ -24,7 +24,6 @@
 # define WIDTH 800
 # define HEIGHT 600
 
-# define TILE_SIZE 16
 # define MAP_SIZE 8
 # define TEX_HEIGHT 64
 # define TEX_WIDTH 64
@@ -85,32 +84,32 @@ typedef struct s_draw
 
 typedef struct s_img
 {
-	void	*img_ptr;		// The pointer to the loaded image
-	char	*addr;			// The raw memory address of the pixels
-	int		width;			// Texture width (e.g., 64)
-	int		height;			// Texture height (e.g., 64)
-	int		bpp;			// Bits per pixel
-	int		line_length;	// How many bytes are in a single row of the image
+	void	*img_ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
 	int		endian;
 }			t_img;
 
 // Ray info
 typedef struct s_ray
 {
-	double	camera_x;		// Determina inclinacion de cada rayo (-1 a 1)
-	double	ray_dir_x;		// Direccion del rayo (eje X)
-	double	ray_dir_y;		// Direccion del rayo (eje Y)
-	int		map_x;			// Posicion X del rayo en el mapa
-	int		map_y;			// Posicion Y del rayo en el mapa
-	double	delta_dist_x;	// Distancia que recorre el rayo en 1 unidad (eje X)
-	double	delta_dist_y;	// Distancia que recorre el rayo en 1 unidad (eje Y)
-	double	side_dist_x;	// Distancia del rayo al siguiente borde de la celda
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
 	double	side_dist_y;
-	int		step_x;			// Paso que avanza el rayo cuando no choca
+	int		step_x;
 	int		step_y;
-	int		side;			// Indica la pared con la que choca
-	double	real_dist;		// Distancia real
-	double	hit_x;			// Punto donde choca con la pared
+	int		side;
+	double	real_dist;
+	double	hit_x;
 	double	hit_y;
 	int		is_door;
 }			t_ray;
@@ -152,10 +151,10 @@ typedef struct s_cub
 	char		*close_door;
 	int			floor_color;
 	int			ceiling_color;
-	int			elements_found; // Tracks if we hit the magic number 6
+	int			elements_found;
 	t_map		map;
 	t_player	player;
-	t_img		textures[6]; // 0: N, 1: S, 2: E, 3: W, 4: Open, 5: Close
+	t_img		textures[6];
 	void		*mlx;
 	void		*win;
 	t_keys		keys;

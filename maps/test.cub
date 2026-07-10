@@ -1,6 +1,6 @@
-NO ./textures/test_brick.xpm
-SO ./textures/test_brick.xpm
-WE ./textures/test_brick.xpm
+NO ./textures/test_brick_torch.xpm
+SO ./textures/test_brick_inscryption.xpm
+WE ./textures/test_brick_scratch.xpm
 EA ./textures/test_brick.xpm
 
 F 30,30,45
