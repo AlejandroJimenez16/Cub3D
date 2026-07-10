@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_utils.c                                      :+:      :+:    :+:   */
+/*   cub3d_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:25 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/07 13:51:13 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/10 20:17:30 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,16 @@ void	err_exit(t_cub *cub, char *message)
 		write(2, "\n", 1);
 	}
 	if (cub)
+	{
+		if (cub->win && cub->mlx)
+			mlx_destroy_window(cub->mlx, cub->win);
 		free_cub(cub);
+		if (cub->mlx)
+		{
+			mlx_destroy_display(cub->mlx);
+			free(cub->mlx);
+		}
+	}
 	exit(1);
 }
 
