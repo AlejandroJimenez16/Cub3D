@@ -83,12 +83,6 @@ static void	run_game(t_cub *cub)
 	load_texture(cub, EA, cub->ea_path);
 	load_texture(cub, WE, cub->we_path);
 	ft_printf("Map and config loaded successfully! Starting game...\n");
-	/*
-	mlx_hook(cub->win, 2, 1L << 0, handle_key_press, cub);
-	mlx_hook(cub->win, 3, 1L << 1, handle_key_release, cub);
-	mlx_hook(cub->win, 17, 0, close_window, cub);
-	mlx_loop_hook(cub->mlx, game_loop, cub);
-	*/
 	mlx_hook(cub->win, 2, 1L << 0, (int (*)())(void *)handle_key_press, cub);
 	mlx_hook(cub->win, 3, 1L << 1, (int (*)())(void *)handle_key_release, cub);
 	mlx_hook(cub->win, 17, 0, (int (*)())(void *)close_window, cub);
@@ -118,8 +112,8 @@ int	main(int argc, char **argv)
 	close(fd);
 	pad_map(&cub);
 	validate_cub_map(&cub);
-	run_game(&cub);
 	print_cub_debug(&cub);
+	run_game(&cub);
 	free_cub(&cub);
 	return (0);
 }

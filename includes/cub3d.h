@@ -24,7 +24,8 @@
 # define WIDTH 800
 # define HEIGHT 600
 
-# define TILE_SIZE 16
+# define OFFSET 0.2
+
 # define TEX_HEIGHT 64
 # define TEX_WIDTH 64
 
@@ -77,32 +78,32 @@ typedef struct s_draw
 
 typedef struct s_img
 {
-	void	*img_ptr;		// The pointer to the loaded image
-	char	*addr;			// The raw memory address of the pixels
-	int		width;			// Texture width (e.g., 64)
-	int		height;			// Texture height (e.g., 64)
-	int		bpp;			// Bits per pixel
-	int		line_length;	// How many bytes are in a single row of the image
+	void	*img_ptr;
+	char	*addr;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
 	int		endian;
 }			t_img;
 
 // Ray info
 typedef struct s_ray
 {
-	double	camera_x;		// Determina inclinacion de cada rayo (-1 a 1)
-	double	ray_dir_x;		// Direccion del rayo (eje X)
-	double	ray_dir_y;		// Direccion del rayo (eje Y)
-	int		map_x;			// Posicion X del rayo en el mapa
-	int		map_y;			// Posicion X del rayo en el mapa
-	double	delta_dist_x;	// Distancia que recorre el rayo en 1 unidad (eje X)
-	double	delta_dist_y;	// Distancia que recorre el rayo en 1 unidad (eje Y)
-	double	side_dist_x;	// Distancia desde el pj hasta el rayo (eje X)
-	double	side_dist_y;	// Distancia desde el pj hasta el rayo (eje Y)
-	int		step_x;			// Hacia donde va el rayo
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
 	int		step_y;
-	int		side;			// Indica ara de la pared con la que choca
-	double	real_dist;		// Distancia real
-	double	hit_x;			// Punto donde choca con la pared
+	int		side;
+	double	real_dist;
+	double	hit_x;
 	double	hit_y;
 }			t_ray;
 
@@ -125,10 +126,10 @@ typedef struct s_cub
 	char		*ea_path;
 	int			floor_color;
 	int			ceiling_color;
-	int			elements_found; // Tracks if we hit the magic number 6
+	int			elements_found;
 	t_map		map;
 	t_player	player;
-	t_img		textures[4]; // 0: North, 1: South, 2: East, 3: West
+	t_img		textures[4];
 	void		*mlx;
 	void		*win;
 	t_keys		keys;
@@ -165,10 +166,6 @@ int		move_chamera(t_cub *cub);
 
 // raycast.c
 int		raycast_loop(t_cub *cub);
-
-// render.c
-void	draw_ray(t_cub *cub, t_ray *ray, int color);
-void	draw_2d_map(t_cub *cub);
 
 // render3d.c
 void	draw_vertical_line(t_cub *cub, t_ray *ray, int x);

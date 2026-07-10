@@ -12,8 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-#define OFFSET 0.2
-
 static void	handle_collision(t_cub *cub, double next_x, double next_y)
 {
 	if (cub->map.grid[(int)(cub->player.y - OFFSET)]
