@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/07/18 21:06:59 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/18 22:29:13 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@
 
 # define WIDTH 800
 # define HEIGHT 600
-# define TILE_SIZE 16
+
+# define MAP_SIZE 8
 # define TEX_HEIGHT 64
 # define TEX_WIDTH 64
+
+# define OFFSET 0.2
+
 # define NO 0
 # define SO 1
 # define EA 2
@@ -33,8 +37,9 @@
 # define OPEN 4
 # define CLOSE 5
 
-# define MOVE_SPEED 0.03
-# define ROT_SPEED 0.009
+# define MOVE_SPEED 0.06
+# define ROT_SPEED 0.015
+# define MOUSE_SENS 0.0015
 
 # define ESC 65307
 
@@ -46,6 +51,7 @@
 # define LEFT_KEY 65361 
 # define RIGHT_KEY 65363
 
+# define KEY_SPACE 32
 
 typedef struct s_map
 {
@@ -108,6 +114,22 @@ typedef struct s_ray
 	int		is_door;
 }			t_ray;
 
+// Elements to draw ray
+typedef struct s_line
+{
+	double	x1;
+	double	y1;
+	double	x2;
+	double	y2;
+	double	dx;
+	double	dy;
+	double	steps;
+	double	current_x;
+	double	current_y;
+	double	move_x;
+	double	move_y;
+}			t_line;
+
 typedef struct s_keys
 {
 	int		w;
@@ -132,15 +154,13 @@ typedef struct s_cub
 	int			elements_found;
 	t_map		map;
 	t_player	player;
-	t_img		textures[4]; // 0: North, 1: South, 2: East, 3: West
+	t_img		textures[6];
 	void		*mlx;
 	void		*win;
 	t_keys		keys;
+	int			fd;
 	int			is_closed;
 }				t_cub;
-
-// debug.c (Must erase at end)
-void	print_cub_debug(t_cub *cub);
 
 // file_parser_bonus.c
 void	check_file_extension(const char *path);
@@ -179,9 +199,10 @@ void	init_ray(t_ray *ray, t_cub *cub, int px);
 int		advance_ray(t_ray *ray, t_cub *cub);
 int		raycast_loop(t_cub *cub);
 
-// render.c
-void	draw_ray(t_cub *cub, t_ray *ray, int color);
-void	draw_2d_map(t_cub *cub);
+// minimap_bonus.c
+void	draw_ray_line(t_cub *cub, t_ray *ray, int color);
+void	draw_raycast_lines(t_cub *cub);
+void	draw_minimap(t_cub *cub);
 
 // render3d_bonus.c
 void	draw_vertical_line(t_cub *cub, t_ray *ray, int x);

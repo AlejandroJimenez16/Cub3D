@@ -1,6 +1,6 @@
 # Cub3D - 42
 
-*This project has been created as part of the 42 curriculum by  **aleconst** and **alejandj**.*
+*This project has been created as part of the 42 curriculum by **aleconst** and **alejandj**.*
 
 ## 📝 Description
 
@@ -44,14 +44,30 @@ To build and run **cub3D**, follow these steps:
 
 3. Build the project:
 
+    **Mandatory:**
+
     ```bash
     make
     ```
 
+    **Bonus:**
+
+    ```bash
+    make bonus
+    ```
+
 4. Run the program:
+
+    **Mandatory:**
 
     ```bash
     ./cub3D <valid-map.cub>
+    ```
+
+    **Bonus:**
+
+    ```bash
+    ./cub3D_bonus <valid-map.cub>
     ```
 
 ## 📚 Resources

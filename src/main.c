@@ -17,31 +17,10 @@
 */
 static void	init_cub(t_cub *cub)
 {
-	cub->no_path = NULL;
-	cub->so_path = NULL;
-	cub->we_path = NULL;
-	cub->ea_path = NULL;
+	ft_memset(cub, 0, sizeof(*cub));
 	cub->floor_color = -1;
 	cub->ceiling_color = -1;
-	cub->elements_found = 0;
-	cub->map.grid = NULL;
-	cub->map.width = 0;
-	cub->map.height = 0;
-	cub->map.player_count = 0;
-	cub->player.x = 0.0;
-	cub->player.y = 0.0;
-	cub->player.dir_x = 0.0;
-	cub->player.dir_y = 0.0;
-	cub->player.plane_x = 0.0;
-	cub->player.plane_y = 0.0;
-	cub->mlx = NULL;
-	cub->win = NULL;
-	cub->keys.w = 0;
-	cub->keys.a = 0;
-	cub->keys.s = 0;
-	cub->keys.d = 0;
-	cub->keys.left = 0;
-	cub->keys.right = 0;
+	cub->fd = -1;
 }
 
 static void	load_texture(t_cub *cub, int index, char *path)
@@ -74,6 +53,8 @@ static void	run_game(t_cub *cub)
 		return ;
 	}
 	cub->screen.img_ptr = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	if (!cub->screen.img_ptr)
+		err_exit(cub, "Error\nFailed to create screen image");
 	cub->screen.addr = mlx_get_data_addr(cub->screen.img_ptr,
 			&cub->screen.bpp,
 			&cub->screen.line_length,
@@ -108,11 +89,12 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_cub(&cub);
+	cub.fd = fd;
 	parse_file(fd, &cub);
 	close(fd);
+	cub.fd = -1;
 	pad_map(&cub);
 	validate_cub_map(&cub);
-	print_cub_debug(&cub);
 	run_game(&cub);
 	free_cub(&cub);
 	return (0);

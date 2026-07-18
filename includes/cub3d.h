@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 13:53:10 by alejandj          #+#    #+#             */
-/*   Updated: 2026/07/09 20:11:01 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/18 22:29:19 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define WE 3
 
 # define MOVE_SPEED 0.06
-# define ROT_SPEED 0.01
+# define ROT_SPEED 0.015
 
 # define ESC 65307
 
@@ -133,10 +133,8 @@ typedef struct s_cub
 	void		*mlx;
 	void		*win;
 	t_keys		keys;
+	int			fd;
 }				t_cub;
-
-// debug.c (Must erase at end)
-void	print_cub_debug(t_cub *cub);
 
 // file_parser.c
 void	check_file_extension(const char *path);

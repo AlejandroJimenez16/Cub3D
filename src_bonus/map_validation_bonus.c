@@ -112,7 +112,7 @@ static int	check_walls(t_map *map)
 		x = -1;
 		while (map->grid[y][++x])
 		{
-			if (ft_strchr("0NSEW", map->grid[y][x]))
+			if (ft_strchr("0NSEWD", map->grid[y][x]))
 			{
 				if (!is_enclosed(map, y, x))
 					return (0);

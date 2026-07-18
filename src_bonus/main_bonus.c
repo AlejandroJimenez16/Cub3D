@@ -58,11 +58,12 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_cub(&cub);
+	cub.fd = fd;
 	parse_file(fd, &cub);
 	close(fd);
+	cub.fd = -1;
 	pad_map(&cub);
 	validate_cub_map(&cub);
-	print_cub_debug(&cub);
 	run_game(&cub);
 	free_cub(&cub);
 	return (0);

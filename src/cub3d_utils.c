@@ -70,7 +70,18 @@ void	err_exit(t_cub *cub, char *message)
 		write(2, "\n", 1);
 	}
 	if (cub)
+	{
+		if (cub->fd >= 0)
+			close(cub->fd);
+		if (cub->win && cub->mlx)
+			mlx_destroy_window(cub->mlx, cub->win);
 		free_cub(cub);
+		if (cub->mlx)
+		{
+			mlx_destroy_display(cub->mlx);
+			free(cub->mlx);
+		}
+	}
 	exit(1);
 }
 

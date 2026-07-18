@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/09 12:16:51 by alejandj          #+#    #+#             */
-/*   Updated: 2026/07/10 19:58:07 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/09 12:48:39 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	load_texture(t_cub *cub, int index, char *path)
 void	create_screen_load_textures(t_cub *cub)
 {
 	cub->screen.img_ptr = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	if (!cub->screen.img_ptr)
+		err_exit(cub, "Error\nFailed to create screen image");
 	cub->screen.addr = mlx_get_data_addr(cub->screen.img_ptr,
 			&cub->screen.bpp,
 			&cub->screen.line_length,

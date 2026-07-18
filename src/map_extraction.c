@@ -30,6 +30,8 @@ static char	**grow_grid(char **old_grid, int old_height, char *new_line)
 		i++;
 	}
 	new_grid[i] = ft_strdup(new_line);
+	if (!new_grid[i])
+		return (free(new_grid), NULL);
 	new_grid[i + 1] = NULL;
 	free(old_grid);
 	return (new_grid);
@@ -40,12 +42,12 @@ static char	**grow_grid(char **old_grid, int old_height, char *new_line)
 */
 void	extract_map_line(char *line, t_cub *cub)
 {
-	cub->map.grid = grow_grid(cub->map.grid, cub->map.height, line);
-	if (!cub->map.grid)
-	{
-		free(line);
+	char	**new_grid;
+
+	new_grid = grow_grid(cub->map.grid, cub->map.height, line);
+	if (!new_grid)
 		err_exit(cub, "Error\nMalloc failed during map extraction");
-	}
+	cub->map.grid = new_grid;
 	cub->map.height++;
 }
 
