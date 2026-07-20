@@ -6,7 +6,7 @@
 /*   By: alejandj <alejandj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 14:10:52 by alejandj          #+#    #+#             */
-/*   Updated: 2026/05/05 18:48:50 by alejandj         ###   ########.fr       */
+/*   Updated: 2026/07/20 23:26:59 by alejandj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	create_window(t_cub *cub)
 	cub->mlx = mlx_init();
 	if (!cub->mlx)
 		return (1);
-	cub->win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, "Cub3d");
+	cub->win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, "Cub3D");
 	if (!cub->win)
 		return (1);
 	return (0);
