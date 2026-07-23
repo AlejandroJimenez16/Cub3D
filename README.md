@@ -4,9 +4,9 @@
 
 ## 📝 Description
 
-**cub3D** is a 3D graphical game engine developed in C, inspired by the classic *Wolfenstein 3D*. The core objective of this project is to explore the foundations of computer graphics, mathematics, and real-time rendering without relying on modern 3D graphics libraries.
+**cub3D** is a raycasting engine developed in C, inspired by the classic *Wolfenstein 3D*. The core objective of this project is to explore the foundations of computer graphics, mathematics, and real-time rendering without relying on modern 3D graphics libraries.
 
-Instead, the project utilizes **Raycasting**, a geometric technique that casts rays from the player's perspective to calculate the distance to walls and render a pseudo-3D environment from a 2D map.
+Instead, the project utilizes **raycasting**, a geometric technique that casts rays from the player's perspective to calculate the distance to walls and render a pseudo-3D environment from a 2D map.
 
 ### 🎮 Project Overview & Goals
 
@@ -61,13 +61,13 @@ To build and run **cub3D**, follow these steps:
     **Mandatory:**
 
     ```bash
-    ./cub3D <valid-map.cub>
+    ./cub3D <valid_map.cub>
     ```
 
     **Bonus:**
 
     ```bash
-    ./cub3D_bonus <valid-map.cub>
+    ./cub3D_bonus <valid_map.cub>
     ```
 
 ## 📚 Resources
@@ -77,7 +77,7 @@ To build and run **cub3D**, follow these steps:
 - **42 Subject** – Official project specification.
 - **MiniLibX Documentation** – Graphics library reference.
 - **YouTube** – Video tutorials used to better understand raycasting, DDA, and project structure.
-- **Google Images** - Used to find visual references and inspiration for textures and sprites.
+- **Google Images** – Used to find visual references and inspiration for textures and sprites.
 
 ### 🤖 AI Usage
 
